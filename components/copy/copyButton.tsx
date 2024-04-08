@@ -1,8 +1,13 @@
 import styles from "./copyButton.module.css";
 
-const CopyButton = () => {
+const CopyButton = ({ url }: { url: string }) => {
   return (
-    <button className={styles.copy}>
+    <button
+      className={styles.copy}
+      onClick={() => {
+        navigator.clipboard.writeText(url);
+      }}
+    >
       <span
         data-text-end="Copied!"
         data-text-initial="Copy to clipboard"
