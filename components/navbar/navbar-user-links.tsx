@@ -13,7 +13,7 @@ export const NavbarUserLinks: FC = () => {
 
   return (
     <>
-      <Link href="/login" className={`${buttonVariants()} gap-x-2 text-base`}>
+      <Link href="#" className={`${buttonVariants()} gap-x-2 text-base`}>
         Get In <ArrowRight size={20} />
       </Link>
     </>

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const HeroCard = () => {
   return (
-    <div className="card">
+    <div className="card hidden md:flex">
       <div className="content">
         <div className="back">
           <div className="back-content">
