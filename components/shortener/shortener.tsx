@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import axios from "axios";
 import Loader from "../loader/loader";
 import CopyLink from "../copy/copyLink";
+import { apiUrl, baseUrl } from "@/lib/static";
+
 const Shortener = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
@@ -25,17 +27,25 @@ const Shortener = () => {
     // Your logic to shorten the URL
     const longUrl = inputRef.current.value;
     console.log("Long URL: ", longUrl);
-    const res = await axios.post("http://localhost:5000/url", {
-      longUrl,
-    });
-    console.log("Shortened URL: ", "http://localhost:5000/" + res.data.urlId);
-    setShortenedUrl("http://localhost:5000/" + res.data.urlId);
-    setTimeout(() => {
+
+    try {
+      const res = await axios.post(apiUrl, { longUrl });
+      setShortenedUrl(baseUrl + res.data.urlId);
       toast.success(
         <p className="text-lg font-medium">URL shortened successfully!</p>
       );
+      setTimeout(() => {
+        setFetching(false);
+      }, 1000);
+    } catch (error) {
+      console.error("Error: ", error);
+      toast.error(
+        <p className="text-lg font-medium">
+          Something went wrong! Please try again.
+        </p>
+      );
       setFetching(false);
-    }, 1000);
+    }
   };
   return (
     <section
