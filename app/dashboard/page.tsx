@@ -1,7 +1,7 @@
 "use client";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import Loader from "@/components/loader/loader";
-
+import { useEffect } from "react";
 export default function Dashboard() {
   const { isLoaded, user } = useUser();
   if (!isLoaded) {

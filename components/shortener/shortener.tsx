@@ -4,47 +4,32 @@ import { Button } from "@/components/ui/button";
 import { valuePoints } from "@/lib/constants";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import axios from "axios";
 import Loader from "../loader/loader";
 import CopyLink from "../copy/copyLink";
-import { apiUrl, baseUrl } from "@/lib/static";
-
+import useShortener from "@/hooks/useShortener";
 const Shortener = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
-  const [fetching, setFetching] = useState<boolean>(false);
+  const shortner = useShortener();
   const handleShorten = async () => {
-    setFetching(true);
-    console.log("Shorten Clicked");
     if (!inputRef.current?.value) {
-      toast.warning(
-        <p className="text-lg font-medium">Please enter a URL to shorten.</p>
-      );
-      setFetching(false);
+      toast.error("Please enter a URL to shorten");
       return;
     }
-
-    // Your logic to shorten the URL
     const longUrl = inputRef.current.value;
-    console.log("Long URL: ", longUrl);
+    console.log("longUrl", longUrl);
 
-    try {
-      const res = await axios.post(apiUrl, { longUrl });
-      setShortenedUrl(baseUrl + res.data.urlId);
-      toast.success(
-        <p className="text-lg font-medium">URL shortened successfully!</p>
-      );
-      setTimeout(() => {
-        setFetching(false);
-      }, 1000);
-    } catch (error) {
-      console.error("Error: ", error);
-      toast.error(
-        <p className="text-lg font-medium">
-          Something went wrong! Please try again.
-        </p>
-      );
-      setFetching(false);
+    if (shortner) {
+      // Check if shortner is not null
+      const shortUrl = await shortner.shortenUrl(longUrl);
+      if (shortUrl) {
+        console.log("shortUrl", shortUrl);
+        setShortenedUrl(shortUrl);
+        toast.success("URL shortened successfully");
+      } else {
+        console.log(shortner.error);
+        toast.error("Failed to shorten URL");
+      }
     }
   };
   return (
@@ -56,7 +41,7 @@ const Shortener = () => {
         Bit<span className="text-meta-3">Snip</span>
       </h1>
       <div className="bg-white p-8 rounded-xl shadow-xl mx-4 md:w-2/3 md:h-72 flex flex-col justify-center items-center">
-        {fetching ? (
+        {shortner?.processing ? (
           <Loader />
         ) : (
           <>
