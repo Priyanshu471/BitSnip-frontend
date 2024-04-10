@@ -7,12 +7,12 @@ export const NavBar: FC = () => {
   return (
     <>
       <div className="animate-in fade-in w-full">
-        <nav className="container px-6 md:px-8 py-4">
+        <nav className=" px-6 md:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <Logo full />
             </Link>
-            <div className="">
+            <div className="hidden sm:flex">
               <NavbarUserLinks />
             </div>
           </div>

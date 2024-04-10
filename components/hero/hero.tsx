@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Link } from "react-scroll";
+import { NavbarUserLinks } from "../navbar/navbar-user-links";
 
 export default function Hero() {
   const router = useRouter();
@@ -15,8 +16,10 @@ export default function Hero() {
     <>
       <section className="h-screen flex items-center -mt-10 justify-center">
         <div className="container flex flex-col items-center gap-8 text-center">
-          <Badge variant="secondary">Shorter Links, Quicker Clicks!</Badge>
-          <Badge className="space-x-4 font-normal text-sm">
+          <Badge variant="outline" className="bg-meta-1">
+            Shorter Links, Quicker Clicks!
+          </Badge>
+          <Badge className="space-x-4 font-normal text-xs md:text-sm ">
             <p>
               <span className="font-bold">Quick </span>Links
             </p>
@@ -35,7 +38,7 @@ export default function Hero() {
             <span className="text-meta-3"> better!</span>
           </h1>
           <HeroCard />
-          <div className="space-x-4">
+          <div className="space-x-4 space-y-2">
             <Link
               to="short"
               spy={true}
@@ -44,7 +47,7 @@ export default function Hero() {
               duration={500}
             >
               <Button size="lg" className="text-lg">
-                Make it short!
+                Short it now!
               </Button>
             </Link>
 
@@ -56,6 +59,11 @@ export default function Hero() {
             >
               Spread the love <Star className="w-5 h-5 ml-2 fill-yellow-200" />
             </Button>
+            {/* <p className="text-center text-sm bg-red-600 -ml-4">Or</p> */}
+            <div className="sm:hidden flex justify-center flex-col space-y-1 p-2 border rounded-md">
+              <p className="text-xs mr-4">* Get in to use full service</p>
+              <NavbarUserLinks />
+            </div>
           </div>
         </div>
       </section>

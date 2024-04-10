@@ -10,7 +10,10 @@ import NavTabs from "./navTabs";
 
 const Navbar = () => {
   const scrolled = useScrollTop();
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+  if (!isLoaded) {
+    return null;
+  }
   return (
     <div
       className={cn(

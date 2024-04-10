@@ -18,8 +18,8 @@ const WorkspaceName = () => {
   const { onOpen } = useWorkspace();
   return (
     <Popover>
-      <PopoverTrigger className="p-1 rounded-md hover:bg-muted-foreground/10">
-        <div className="flex justify-center items-center gap-x-2">
+      <PopoverTrigger className="p-1 rounded-md hover:bg-muted-foreground/10 w-36">
+        <div className="flex justify-between items-center gap-x-2">
           <div
             className="w-8 h-8 rounded-full text-white flex justify-center items-center p-1 text-sm"
             style={{ backgroundColor: activeWorkspace.color }}

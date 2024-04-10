@@ -12,9 +12,14 @@ const icons = [
 ];
 export const Footer = () => {
   return (
-    <footer className="container flex flex-col md:flex-row w-full items-center justify-between gap-2 py-10 md:h-24 md:py-0">
-      <div className="flex items-center gap-4 px-8 flex-col md:flex-row md:gap-2 md:px-0 w-1/2">
-        <Logo full={true} />
+    <footer className="flex flex-col md:flex-row w-full items-center justify-between space-y-8 p-10 pb-2  md:h-24 md:py-0 border-t bg-muted-foreground/15">
+      <div className="flex items-center gap-4 px-8 flex-col md:flex-row md:gap-2 md:px-0 md:w-1/2">
+        <div>
+          <Logo full={true} />
+          <p className="text-xs text-muted-foreground">
+            Snip. Share. Simplify.
+          </p>
+        </div>
         <p className="text-center text-xs md:text-sm  leading-3 md:leading-loose md:text-left">
           Made with ❤️ by{" "}
           <Link
@@ -27,7 +32,7 @@ export const Footer = () => {
         </p>
       </div>
 
-      <div className="container flex flex-col justify-center items-end gap-4 my-4 md:w-1/2 -mr-10">
+      <div className="flex flex-col justify-center items-end gap-4 my-4 md:w-1/2">
         <div className="flex items-center gap-4 justify-center">
           {icons.map((icon, index) => (
             <Link
@@ -44,9 +49,9 @@ export const Footer = () => {
             </Link>
           ))}
         </div>
-        <div className="flex items-center text-xs text-gray-500 mb-2 -ml-16">
+        <h1 className="flex items-center text-xs text-meta-8 mr-8 md:mr-4 pb-2">
           © 2024 BitSnip. All rights reserved.
-        </div>
+        </h1>
       </div>
     </footer>
   );
