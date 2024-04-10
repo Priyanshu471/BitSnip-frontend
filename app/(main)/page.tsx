@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center justify-evenly">
         <Hero />
-        <Separator className="bg-meta-4 w-3/4 h-0.5" />
+        <Separator className="bg-meta-4 w-3/4 h-0.5 mb-8" />
         <Shortener />
       </div>
     </>

@@ -50,7 +50,7 @@ const Shortener = () => {
   return (
     <section
       id="short"
-      className="flex flex-col justify-center items-center min-h-screen w-full space-y-10"
+      className="flex flex-col justify-center items-center min-h-screen w-full space-y-10 mb-10"
     >
       <h1 className="text-meta-5 text-5xl font-semibold">
         Bit<span className="text-meta-3">Snip</span>

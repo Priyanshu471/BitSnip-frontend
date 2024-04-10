@@ -8,13 +8,17 @@ import {
   ThumbsUp,
 } from "lucide-react";
 
-type valuePoints = {
+type ValuePoints = {
   icon: LucideIcon;
   name: string;
   des: string;
 };
+export type ColorCodes = {
+  color: string;
+  name: string;
+};
 
-export const valuePoints: valuePoints[] = [
+export const valuePoints: ValuePoints[] = [
   {
     icon: ThumbsUp,
     name: "Easy",
@@ -44,5 +48,28 @@ export const valuePoints: valuePoints[] = [
     icon: MonitorSmartphone,
     name: "Devices",
     des: "BitSnip is responsive, you can use it on any device, no matter the screen size",
+  },
+];
+
+export const colorCodes: ColorCodes[] = [
+  {
+    color: "#A6AFFF",
+    name: "Purple",
+  },
+  {
+    color: "#AAFFA6",
+    name: "Green",
+  },
+  {
+    color: "#FF7272",
+    name: "Red",
+  },
+  {
+    color: "#5DB9FF",
+    name: "Blue",
+  },
+  {
+    color: "#FFA6EF",
+    name: "Pink",
   },
 ];

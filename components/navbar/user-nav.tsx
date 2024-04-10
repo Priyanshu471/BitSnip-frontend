@@ -11,50 +11,50 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "@/components/ui/use-toast";
-import { getAuth, signOut } from "firebase/auth";
-import { useRouter } from "next/navigation";
-// import { useUser } from "reactfire";
+import { useWorkspace } from "@/hooks/useWorkspace";
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export function UserNav() {
-  // const { data } = useUser();
-  const router = useRouter();
-  const doLogout = async () => {
-    await signOut(getAuth());
-    toast({
-      title: "Logged out",
-      description: "You have been logged out.",
-    });
-    router.replace("/");
-  };
+  const { user } = useUser();
+  const { onOpen } = useWorkspace();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-10 w-10">
-            <AvatarImage src={"/avatars/04.png"} alt="@shadcn" />
-            <AvatarFallback>{"blah blah"}</AvatarFallback>
+            <AvatarImage src={user?.imageUrl} alt="user imaage" />
+            <AvatarFallback>{"User Img"}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{"Anonymous"}</p>
+            <p className="text-sm font-medium leading-none">
+              {user?.firstName}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {"No email"}
+              {user?.emailAddresses[0]?.emailAddress}
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/dashboard">Dashboard</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={onOpen}>Create Workspace</DropdownMenuItem>
           <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={doLogout}>Log out</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <SignOutButton>
+            <Link href="/">
+              <Button>Log out</Button>
+            </Link>
+          </SignOutButton>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
