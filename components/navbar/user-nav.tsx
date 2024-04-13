@@ -48,13 +48,15 @@ export function UserNav() {
           <DropdownMenuItem>Settings</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <SignOutButton>
-            <Link href="/">
-              <Button>Log out</Button>
-            </Link>
-          </SignOutButton>
-        </DropdownMenuItem>
+        <SignOutButton
+          signOutCallback={() => {
+            redirect: true;
+          }}
+        >
+          <Link href="/">
+            <Button>Log out</Button>
+          </Link>
+        </SignOutButton>
       </DropdownMenuContent>
     </DropdownMenu>
   );

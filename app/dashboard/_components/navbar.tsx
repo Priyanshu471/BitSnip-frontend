@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div
       className={cn(
-        "z-50 bg-background fixed w-full flex flex-col border-b-2",
+        "z-[999] bg-background fixed w-full flex flex-col border-b-2",
         scrolled && "border-b shadow"
       )}
     >
@@ -34,7 +34,6 @@ const Navbar = () => {
         <div>{isSignedIn && <UserNav />}</div>
       </div>
       <NavTabs />
-      {/* <WorkspaceName /> */}
     </div>
   );
 };

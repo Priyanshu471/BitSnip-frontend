@@ -6,7 +6,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col h-screen animate-in fade-in">
       <Navbar />
-      <div className="flex flex-col grow h-full mt-[150px]">{children}</div>
+      <div className="flex flex-col grow h-full mt-[137px]">{children}</div>
     </div>
   );
 }

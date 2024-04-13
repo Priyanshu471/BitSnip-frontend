@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import Loader from "../loader/loader";
 import CopyLink from "../copy/copyLink";
-import useShortener from "@/hooks/useShortener";
+import { useShortener } from "@/hooks/useShortener";
 const Shortener = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
@@ -20,14 +20,12 @@ const Shortener = () => {
     console.log("longUrl", longUrl);
 
     if (shortner) {
-      // Check if shortner is not null
       const shortUrl = await shortner.shortenUrl(longUrl);
       if (shortUrl) {
         console.log("shortUrl", shortUrl);
         setShortenedUrl(shortUrl);
         toast.success("URL shortened successfully");
       } else {
-        console.log(shortner.error);
         toast.error("Failed to shorten URL");
       }
     }
