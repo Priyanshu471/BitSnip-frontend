@@ -38,10 +38,6 @@ export default function ShortenerModal() {
 
     const longUrl = inputRef.current.value;
     const shortUrl = await shortner.shortenUrl(longUrl);
-    const data = await previewer.fetchLinkPreview(longUrl);
-    if (data) {
-      setLinkData([...linkData, data]);
-    }
     if (shortUrl) {
       navigator.clipboard.writeText(shortUrl);
       toast.success("Copied to clipboard!");
@@ -49,6 +45,10 @@ export default function ShortenerModal() {
     } else {
       toast.error("Failed to shorten URL");
       onClose();
+    }
+    const data = await previewer.fetchLinkPreview(longUrl);
+    if (data) {
+      setLinkData([...linkData, data]);
     }
   };
   const { isOpen, onClose } = useLinkCreator();

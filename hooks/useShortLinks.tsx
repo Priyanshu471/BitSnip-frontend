@@ -7,6 +7,8 @@ interface ShortLinkState {
 }
 
 export const useShortLinks = create<ShortLinkState>((set) => ({
-  shortLinks: { urls: [] },
+  shortLinks: {
+    urls: [],
+  },
   setShortLinks: (data) => set({ shortLinks: data }),
 }));
