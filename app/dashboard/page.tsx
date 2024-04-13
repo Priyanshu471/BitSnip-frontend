@@ -26,7 +26,7 @@ export default function Dashboard() {
   return (
     <div className="">
       <div className="h-full flex flex-col relative tems-center justify-center">
-        {isLoaded && shortLinks.urls.length === 0 && (
+        {shortLinks.urls.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full">
             <Nothing pagename="links" />
             <Button className="gap-x-2" onClick={onOpen}>
