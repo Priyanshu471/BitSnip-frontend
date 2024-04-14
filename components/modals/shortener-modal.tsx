@@ -18,11 +18,13 @@ import { useRef } from "react";
 import { toast } from "sonner";
 import useLinkPreview from "@/hooks/useLinkPreview";
 import { useLinkData } from "@/hooks/useLinkData";
+import { useReload } from "@/hooks/useReload";
 
 export default function ShortenerModal() {
   const shortner = useShortener();
   const inputRef = useRef<HTMLInputElement>(null);
   const { setLinkData, linkData } = useLinkData();
+  const { setFetch } = useReload();
   const previewer = useLinkPreview();
   const handleShorten = async () => {
     if (!inputRef.current?.value) {
@@ -39,16 +41,13 @@ export default function ShortenerModal() {
     const longUrl = inputRef.current.value;
     const shortUrl = await shortner.shortenUrl(longUrl);
     if (shortUrl) {
+      setFetch(true);
       navigator.clipboard.writeText(shortUrl);
       toast.success("Copied to clipboard!");
       onClose();
     } else {
       toast.error("Failed to shorten URL");
       onClose();
-    }
-    const data = await previewer.fetchLinkPreview(longUrl);
-    if (data) {
-      setLinkData([...linkData, data]);
     }
   };
   const { isOpen, onClose } = useLinkCreator();

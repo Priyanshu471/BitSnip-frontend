@@ -20,14 +20,14 @@ export function CopyButton({ urlId }: { urlId: string }) {
         setTimeout(() => setCopied(false), 3000);
       }}
       className={cn(
-        "group rounded-lg bg-gray-100 p-1.5 transition-all duration-75 hover:scale-105 hover:bg-blue-100 active:scale-95"
+        "group rounded-lg bg-meta-0 p-1 transition-all duration-75 hover:scale-105 hover:bg-meta-1 active:scale-95 rounded-l-none -ml-0.5"
       )}
     >
       <span className="sr-only">Copy</span>
       {copied ? (
-        <Check className="text-meta-3 transition-all group-hover:text-meta-0" />
+        <Check className="text-meta-1 transition-all group-hover:text-meta-0" />
       ) : (
-        <Comp className="text-meta-3 transition-all group-hover:text-meta-0" />
+        <Comp className="text-meta-1 transition-all group-hover:text-meta-0" />
       )}
     </button>
   );

@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -59,7 +60,7 @@ const Sidebar = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "h-full group/sidebar bg-[#f2f2f2] border-r overflow-y-auto relative flex w-1/5 flex-col items-center z-[99]",
+          "h-full group/sidebar bg-[#f2f2f2] border-r overflow-y-auto relative flex w-[350px] flex-col items-center z-[99] mt-[0px]",
           isRestting && "transition-all duration-300 ease-in-out",
           isMobile && "w-0 absolute"
         )}

@@ -23,7 +23,7 @@ export const NavbarUserLinks: FC = () => {
               variant="outline"
               className={`flex w-16 h-8 md:w-24 md:h-10 text-xs md:text-base  text-meta-4 items-center gap-x-2 border-2 border-meta-0 hover:bg-meta-0/80 hover:text-white`}
             >
-              Sign In
+              Sign Up
             </Button>
           </Link>
         </div>

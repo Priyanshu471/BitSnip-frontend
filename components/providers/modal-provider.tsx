@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import WorkspaceModal from "../modals/workspace-modal";
 import ShortenerModal from "../modals/shortener-modal";
+import { DeleteModal } from "../modals/delete-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -12,6 +13,7 @@ export const ModalProvider = () => {
     <>
       <WorkspaceModal />
       <ShortenerModal />
+      <DeleteModal />
     </>
   );
 };

@@ -3,13 +3,9 @@ import axios, { AxiosError, Method } from "axios";
 import { toast } from "sonner";
 
 export interface PreviewData {
-  author?: string | null;
-  date?: string;
   description: string;
   image: string;
   title: string;
-  logo?: string;
-  publisher?: string;
   url: string;
 }
 interface LinkPreviewer {

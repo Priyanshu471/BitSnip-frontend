@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { PreviewData } from "./useLinkPreview";
+import { UrlData } from "@/lib/types";
 
 interface LinkState {
-  linkData: PreviewData[];
-  setLinkData: (data: PreviewData[]) => void;
+  linkData: UrlData[];
+  setLinkData: (data: UrlData[]) => void;
 }
 export const useLinkData = create<LinkState>((set) => ({
   linkData: [],

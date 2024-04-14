@@ -101,3 +101,35 @@ export const allLinks: AllLinks = {
     },
   ],
 };
+
+interface PreviewData {
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+interface UrlWithPreview extends Url {
+  previewData: PreviewData;
+}
+
+export interface AllLinksWithPreview {
+  urls: UrlWithPreview[];
+}
+
+export const links: AllLinksWithPreview = {
+  urls: [
+    {
+      urlId: "1f4bH5",
+      longUrl:
+        "https://youtu.be/SfPGQN5wKFs?feature=shahttps://youtu.be/SfPGQN5wKFs?feature=shared",
+      previewData: {
+        title: "Saaiyaan (Lyrics) - Rahat Fateh Ali Khan, Salim–Sulaiman",
+        description:
+          "🎶 Rahat Fateh Ali Khan, Salim–Sulaiman - SaaiyaanListen Here: https://open.spotify.com/track/4lSs8Q2cYcrEy2aps8MPgx?si=1a46bf62cbd14d32We are on: https://li...",
+        image: "https://i.ytimg.com/vi/SfPGQN5wKFs/maxresdefault.jpg",
+        url: "https://youtu.be/SfPGQN5wKFs?feature=shahttps://youtu.be/SfPGQN5wKFs?feature=shared",
+      },
+    },
+  ],
+};
