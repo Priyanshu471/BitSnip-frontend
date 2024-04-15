@@ -16,7 +16,6 @@ import { Separator } from "../ui/separator";
 import { useShortener } from "@/hooks/useShortener";
 import { useRef } from "react";
 import { toast } from "sonner";
-import useLinkPreview from "@/hooks/useLinkPreview";
 import { useLinkData } from "@/hooks/useLinkData";
 import { useReload } from "@/hooks/useReload";
 
@@ -25,7 +24,6 @@ export default function ShortenerModal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { setLinkData, linkData } = useLinkData();
   const { setFetch } = useReload();
-  const previewer = useLinkPreview();
   const handleShorten = async () => {
     if (!inputRef.current?.value) {
       toast.error("Url is required");

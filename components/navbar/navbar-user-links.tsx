@@ -10,10 +10,10 @@ export const NavbarUserLinks: FC = () => {
   return (
     <>
       {!isSignedIn && (
-        <div className="flex items-center justify-center gap-2 mr-4">
+        <div className="flex items-center justify-center gap-2">
           <Link href="/sign-in">
             <Button
-              className={`gap-x-2 flex items-center w-16 h-8 md:w-24 md:h-10 text-xs md:text-base`}
+              className={`gap-x-2 flex items-center w-14 sm:w-16  h-8 md:w-24 md:h-10 text-xs md:text-base`}
             >
               Log In
             </Button>
@@ -21,7 +21,7 @@ export const NavbarUserLinks: FC = () => {
           <Link href="/sign-up">
             <Button
               variant="outline"
-              className={`flex w-16 h-8 md:w-24 md:h-10 text-xs md:text-base  text-meta-4 items-center gap-x-2 border-2 border-meta-0 hover:bg-meta-0/80 hover:text-white`}
+              className={`hidden sm:flex w-14 sm:w-16 h-8 md:w-24 md:h-10 text-xs md:text-base  text-meta-4 items-center gap-x-2 border-2 border-meta-0 hover:bg-meta-0/80 hover:text-white`}
             >
               Sign Up
             </Button>

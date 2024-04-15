@@ -14,8 +14,8 @@ export default function Hero() {
   };
   return (
     <>
-      <section className="h-screen flex items-center -mt-10 justify-center">
-        <div className="container flex flex-col items-center gap-8 text-center">
+      <div className="h-screen flex items-center scroll-mt-10 justify-center">
+        <div className="container flex flex-col items-center gap-9 sm:gap-10 text-center">
           <Badge variant="outline" className="bg-meta-1">
             Shorter Links, Quicker Clicks!
           </Badge>
@@ -33,7 +33,7 @@ export default function Hero() {
               <span className="font-bold">No </span>Expiry
             </p>
           </Badge>
-          <h1 className="max-w-4xl font-semibold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-meta-8">
+          <h1 className="max-w-4xl font-semibold text-5xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-meta-8">
             <span className="text-meta-7">urls</span> when the shorter, the
             <span className="text-meta-3"> better!</span>
           </h1>
@@ -60,13 +60,13 @@ export default function Hero() {
               Spread the love <Star className="w-5 h-5 ml-2 fill-yellow-200" />
             </Button>
             {/* <p className="text-center text-sm bg-red-600 -ml-4">Or</p> */}
-            <div className="sm:hidden flex justify-center flex-col space-y-1 p-2 border rounded-md">
+            {/* <div className="sm:hidden flex justify-center flex-col space-y-1 p-2 border rounded-md">
               <p className="text-xs mr-4">* Get in to use full service</p>
               <NavbarUserLinks />
-            </div>
+            </div> */}
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

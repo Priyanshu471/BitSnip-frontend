@@ -53,7 +53,13 @@ const WorkspaceName = () => {
           </div>
         ))}
         <div className="p-1">
-          <Button onClick={onOpen}>Create New</Button>
+          <Button
+            variant={"secondary"}
+            onClick={onOpen}
+            className="text-meta-3"
+          >
+            Create New
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

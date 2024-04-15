@@ -68,7 +68,7 @@ const Sidebar = () => {
         <div className="flex items-center justify-between w-full space-x-2 px-8 py-4 border-b">
           <Label htmlFor="create-link">Create Link</Label>
           <Button size={"sm"} onClick={onOpen}>
-            <PlusCircle className="hidden md:flex w-5 h-5" />
+            <PlusCircle className="flex w-5 h-5" />
           </Button>
         </div>
         <div
@@ -83,6 +83,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col space-y-2 bg-meta-1/30 w-full px-8 py-4 border-b">
+          <pre className="text-meta-7">Coming soon</pre>
           <h1 className="font-semibold">Filter Links</h1>
           <Input placeholder="Search" />
         </div>

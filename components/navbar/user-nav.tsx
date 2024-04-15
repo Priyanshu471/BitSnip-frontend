@@ -54,7 +54,9 @@ export function UserNav() {
           }}
         >
           <Link href="/">
-            <Button>Log out</Button>
+            <Button variant={"ghost"} className="text-meta-3">
+              Log out
+            </Button>
           </Link>
         </SignOutButton>
       </DropdownMenuContent>

@@ -1,34 +1,18 @@
-import { useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
-import { LinkData } from "@/hooks/useShortener";
-import { useShortener } from "@/hooks/useShortener";
-import useLinkPreview, { PreviewData } from "@/hooks/useLinkPreview";
 import Image from "next/image";
-import { ArrowRight, Trash } from "lucide-react";
+import { ArrowRight, LineChart, Trash } from "lucide-react";
 import Link from "next/link";
 import { CustomTooltip } from "@/components/tooltip";
-import { AllLinks, AllLinksWithPreview, allLinks } from "@/lib/constants";
 import { useLinkData } from "@/hooks/useLinkData";
 import { CopyButton } from "@/components/copy/copyButton-small";
-import { useShortLinks } from "@/hooks/useShortLinks";
 import { linkConstructor } from "@/lib/utils";
-import Loader from "@/components/loader/loader";
-import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
-import { AllLinksData, UrlData } from "@/lib/types";
+import { UrlData } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { useDelete } from "@/hooks/useDelete";
+import LinkMenu from "./linkMenu";
 
-interface Link {
-  urlId: string;
-  longUrl: string;
-  previewData: PreviewData[];
-}
 const Links = () => {
-  const { isLoaded, user } = useUser();
-  const { setLinkData, linkData } = useLinkData();
-
-  const shortener = useShortener();
+  const { linkData } = useLinkData();
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-4 gap-4 my-2">
@@ -66,11 +50,10 @@ const Previewer = ({
   urlId,
 }: PreviewerProps) => {
   const shortUrl = linkConstructor(urlId);
-  console.log(image);
   const { onOpen } = useDelete();
   return (
     <>
-      <div className="max-w-sm bg-meta-9 border border-gray-200 rounded-lg shadow h-[380px] sm:h-[420px]">
+      <div className="max-w-sm bg-meta-9 border border-gray-200 rounded-lg shadow h-[385px] sm:h-[420px]">
         <div className="object-cover bg-meta-1 rounded-t-lg">
           <Image
             src={image || "/image-placeholder.svg"}
@@ -105,7 +88,7 @@ const Previewer = ({
               </Link>
               <CopyButton urlId={shortUrl} />
             </div>
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full items-center">
               <Link
                 href={url}
                 target="_blank"
@@ -114,14 +97,23 @@ const Previewer = ({
                 Visit Site
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
-              <Button
-                className="bg-meta-7 hover:bg-meta-5"
-                onClick={() => {
-                  onOpen(urlId);
-                }}
-              >
-                <Trash />
-              </Button>
+              <LinkMenu>
+                <Link href={"/dashboard/analytics"}>
+                  <div className="hover:bg-foreground/5 cursor-pointer p-2 rounded-md flex items-center gap-x-2">
+                    <LineChart size={16} className="" />
+                    Analyse
+                  </div>
+                </Link>
+                <div
+                  className="hover:bg-foreground/5 cursor-pointer p-2 rounded-md flex items-center gap-x-2 text-meta-5"
+                  onClick={() => {
+                    onOpen(urlId);
+                  }}
+                >
+                  <Trash size={16} className="text-meta-7" />
+                  Delete
+                </div>
+              </LinkMenu>
             </div>
           </div>
         </div>

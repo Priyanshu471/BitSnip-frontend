@@ -12,7 +12,7 @@ export const NavBar: FC = () => {
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <Logo full />
             </Link>
-            <div className="hidden sm:flex">
+            <div className="">
               <NavbarUserLinks />
             </div>
           </div>
