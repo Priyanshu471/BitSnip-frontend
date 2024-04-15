@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { PreviewData } from "./useLinkPreview";
 import { UrlData } from "@/lib/types";
 
 interface LinkState {
