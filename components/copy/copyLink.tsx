@@ -13,11 +13,11 @@ const CopyLink = ({ url }: { url: string }) => {
           and other locations.
         </p>
       </div>
-      <div className="flex shadow-sm items-center md:w-2/3 ">
+      <div className="flex shadow-sm items-center md:w-2/3">
         <Input
           value={url}
           readOnly
-          className="min-h-16 my-2 text-meta-3 py-1 px-4 md:text-lg indent-1 rounded-l-lg rounded-r-none focus-visible:ring-0 focus-visible:ring-offset-0 border-meta-0 bg-transparent"
+          className="min-h-16 my-2 text-meta-3 py-1 px-4 text-lg indent-1 rounded-l-lg rounded-r-none focus-visible:ring-0 focus-visible:ring-offset-0 border-meta-0 bg-transparent"
           name="text"
           type="text"
         />

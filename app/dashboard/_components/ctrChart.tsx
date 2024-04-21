@@ -2,7 +2,9 @@
 import { ApexOptions } from "apexcharts";
 import React, { useEffect, useState } from "react";
 import ApexChart from "./apexChart";
-import { clickCountPerDay, dummyDataAnalytics } from "@/lib/static";
+import { clickCountPerDay } from "@/lib/static";
+import { MousePointer2 } from "lucide-react";
+import { countryData } from "@/lib/constants";
 
 const options: ApexOptions = {
   legend: {
@@ -132,21 +134,25 @@ const CtrChart = ({ data }: CtrChartProps) => {
     });
   };
   return (
-    <div className="w-1/2 col-span-12 rounded-lg border border-stroke bg-white px-5 pb-5 pt-7 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7 xl:col-span-8">
+    <div className="w-full col-span-12 rounded-lg border border-stroke bg-white p-5 shadow sm:px-7 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
           <div className="flex min-w-48">
-            <span className="mr-2 mt-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+            <span className="mr-2 mt-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-meta-3">
+              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-meta-3"></span>
             </span>
-            <div className="w-full flex items-center gap-x-2 text-2xl">
-              <p className="font-semibold">Clicks</p>
-              <p className="font-medium ">{dummyDataAnalytics?.length}</p>
+            <div className="flex flex-col">
+              <div className="w-full flex items-center gap-x-2 text-2xl">
+                <p className="font-semibold text-meta-3">
+                  {countryData?.length}
+                </p>
+                <MousePointer2 size={24} className="text-meta-4/70" />
+              </div>
+              <p className="text-meta-4 font-medium">Total Click</p>
             </div>
           </div>
         </div>
       </div>
-
       <div>
         <div id="ctr" className="-ml-5">
           <ApexChart

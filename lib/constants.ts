@@ -133,3 +133,83 @@ export const links: AllLinksWithPreview = {
     },
   ],
 };
+
+export interface Data {
+  name: string;
+  count: number;
+}
+export interface CountryData {
+  city: string;
+  country: string;
+  code: string;
+}
+export const countryData = [
+  ["Delhi", "India", "IND"],
+  ["Hyderabad", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Hyderabad", "India", "IND"],
+  ["Bengaluru", "India", "IND"],
+  ["Hyderabad", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Mumbai", "India", "IND"],
+  ["Bengaluru", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Jabalpur", "India", "IND"],
+  ["Jabalpur", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Bhopal", "India", "IND"],
+  ["Bhopal", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Indore", "India", "IND"],
+  ["Pratāpgarh", "India", "IND"],
+  ["Tbilisi", "Georgia", "GEO"],
+  ["Raipur", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Montclair", "United States", "USA"],
+  ["Hyderabad", "India", "IND"],
+  ["Montclair", "United States", "USA"],
+  ["Montclair", "United States", "USA"],
+  ["Bengaluru", "India", "IND"],
+  ["Mumbai", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+  ["Delhi", "India", "IND"],
+];
+
+export const countryCount = countryData.reduce((acc, curr) => {
+  const index = acc.findIndex((item) => item.name === curr[1]);
+  if (index !== -1) {
+    acc[index].count += 1;
+  } else {
+    acc.push({ name: curr[1], count: 1 });
+  }
+  return acc;
+}, [] as Data[]);
+
+export const cityCount = countryData.reduce((acc, curr) => {
+  const index = acc.findIndex((item) => item.name === curr[0]);
+  if (index !== -1) {
+    acc[index].count += 1;
+  } else {
+    acc.push({ name: curr[0], count: 1 });
+  }
+  return acc;
+}, [] as Data[]);

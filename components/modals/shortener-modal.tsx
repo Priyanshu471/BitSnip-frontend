@@ -14,38 +14,44 @@ import { Globe, Link, Tag } from "lucide-react";
 import TagSelect from "../multiSelect";
 import { Separator } from "../ui/separator";
 import { useShortener } from "@/hooks/useShortener";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { useLinkData } from "@/hooks/useLinkData";
 import { useReload } from "@/hooks/useReload";
+import MiniSpinner from "../loader/miniSpinner";
 
 export default function ShortenerModal() {
   const shortner = useShortener();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setLinkData, linkData } = useLinkData();
+  const [shortening, setShortening] = useState<boolean>(false);
   const { setFetch } = useReload();
   const handleShorten = async () => {
+    setShortening(true);
     if (!inputRef.current?.value) {
       toast.error("Url is required");
+      setShortening(false);
       return;
     }
     try {
       new URL(inputRef.current.value);
     } catch (_) {
       toast.error("Please enter a valid URL");
+      setShortening(false);
       return;
     }
 
     const longUrl = inputRef.current.value;
     const shortUrl = await shortner.shortenUrl(longUrl);
     if (shortUrl) {
+      setShortening(false);
+      onClose();
       setFetch(true);
       navigator.clipboard.writeText(shortUrl);
       toast.success("Copied to clipboard!");
-      onClose();
     } else {
       toast.error("Failed to shorten URL");
       onClose();
+      setShortening(false);
     }
   };
   const { isOpen, onClose } = useLinkCreator();
@@ -88,6 +94,11 @@ export default function ShortenerModal() {
         </div>
         <DialogFooter>
           <Button type="submit" onClick={handleShorten}>
+            {shortening && (
+              <div className="w-5 text-meta-3 relative mr-2">
+                <MiniSpinner />
+              </div>
+            )}
             Shorten
           </Button>
         </DialogFooter>

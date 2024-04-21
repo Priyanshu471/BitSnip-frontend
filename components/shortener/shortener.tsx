@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Loader from "../loader/loader";
 import CopyLink from "../copy/copyLink";
 import { useShortener } from "@/hooks/useShortener";
+import { RotateCcw } from "lucide-react";
 const Shortener = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
@@ -17,8 +18,12 @@ const Shortener = () => {
       return;
     }
     const longUrl = inputRef.current.value;
-    console.log("longUrl", longUrl);
-
+    try {
+      new URL(longUrl);
+    } catch (_) {
+      toast.error("Please enter a valid URL");
+      return;
+    }
     if (shortner) {
       const shortUrl = await shortner.shortenUrl(longUrl);
       if (shortUrl) {
@@ -44,7 +49,17 @@ const Shortener = () => {
         ) : (
           <>
             {shortenedUrl ? (
-              <CopyLink url={shortenedUrl} />
+              <>
+                <CopyLink url={shortenedUrl} />
+                <Button
+                  className="gap-x-2"
+                  onClick={() => {
+                    setShortenedUrl("");
+                  }}
+                >
+                  Reset <RotateCcw size={15} />
+                </Button>
+              </>
             ) : (
               <>
                 <h1 className="text-2xl  lg:text-4xl  font-bold text-center text-meta-8">

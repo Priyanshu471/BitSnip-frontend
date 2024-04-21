@@ -1,20 +1,20 @@
 .copy {
   /* button */
-  --button-bg: #353434;
-  --button-hover-bg: #464646;
-  --button-text-color: #acafb6;
-  --button-hover-text-color: #00a7c9;
+  --button-bg: #00a7c9;
+  --button-hover-bg: #0fadcf;
+  --button-text-color: #d8e9f6;
+  --button-hover-text-color: #016496;
   --button-border-radius: 5px;
   --button-diameter: 64px;
   --button-outline-width: 1px;
   --button-outline-color: rgb(141, 141, 141);
 
   /* tooltip */
-  --tooltip-bg: #999999;
+  --tooltip-bg: #016496;
   --toolptip-border-radius: 4px;
   --tooltip-font-family: Menlo, Roboto Mono, monospace;
   --tooltip-font-size: 12px;
-  --tootip-text-color: rgb(255, 255, 255);
+  --tootip-text-color: #d8e9f6;
   --tooltip-padding-x: 7px;
   --tooltip-padding-y: 7px;
   --tooltip-offset: 2px;
