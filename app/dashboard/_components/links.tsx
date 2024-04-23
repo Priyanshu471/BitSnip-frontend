@@ -1,17 +1,19 @@
 import Image from "next/image";
-import { ArrowRight, LineChart, Trash } from "lucide-react";
+import { ArrowRight, LineChart, QrCode, Trash } from "lucide-react";
 import Link from "next/link";
 import { CustomTooltip } from "@/components/tooltip";
 import { useLinkData } from "@/hooks/useLinkData";
 import { CopyButton } from "@/components/copy/copyButton-small";
-import { linkConstructor } from "@/lib/utils";
+import { cn, linkConstructor } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { UrlData } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { useDelete } from "@/hooks/useDelete";
 import LinkMenu from "./linkMenu";
+import { useUrlId } from "@/hooks/useUrlId";
+import { useEffect, useState } from "react";
 
-const Links = () => {
+const Links = ({ showPreview }: { showPreview: boolean }) => {
   const { linkData } = useLinkData();
   return (
     <>
@@ -25,6 +27,7 @@ const Links = () => {
               description={link.previewData.description}
               title={link.previewData.title}
               urlId={link.urlId}
+              showPreview={showPreview}
             />
           </div>
         ))}
@@ -41,6 +44,7 @@ interface PreviewerProps {
   description: string;
   title: string;
   urlId: string;
+  showPreview: boolean;
 }
 const Previewer = ({
   url,
@@ -48,23 +52,50 @@ const Previewer = ({
   description,
   title,
   urlId,
+  showPreview,
 }: PreviewerProps) => {
   const shortUrl = linkConstructor(urlId);
   const { onOpen } = useDelete();
+  const { setUrlId, setGet } = useUrlId();
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (showPreview) {
+      timeoutId = setTimeout(() => setShowImage(true), 500);
+    } else {
+      setShowImage(false);
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [showPreview]);
+
   return (
     <>
-      <div className="max-w-sm bg-meta-9 border border-gray-200 rounded-lg shadow h-[385px] sm:h-[420px]">
-        <div className="object-cover bg-meta-1 rounded-t-lg">
-          <Image
-            src={image || "/image-placeholder.svg"}
-            width={800}
-            height={500}
-            loader={({ src }) => src}
-            alt="url preview image"
-            className="rounded-t-lg h-26 sm:h-56"
-          />
+      <div className="max-w-xs md:max-w-[370px] bg-meta-9 border border-gray-200 rounded-lg shadow  min-h-fit">
+        <div
+          className={cn(
+            "object-cover bg-meta-1 rounded-t-lg transition-all duration-500 ",
+            showPreview ? "h-26 sm:h-56" : "h-0"
+          )}
+        >
+          {showImage && (
+            <Image
+              src={image || "/image-placeholder.svg"}
+              width={800}
+              height={500}
+              loader={({ src }) => src}
+              alt="url preview image"
+              className={cn(
+                "rounded-t-lg h-26 sm:h-56 object-cover transition-all",
+                showPreview ? "opacity-100 delay-150" : "opacity-0 "
+              )}
+            />
+          )}
         </div>
-
         <div className="p-5 h-[200px] flex flex-col justify-between">
           <CustomTooltip text={title}>
             <h5 className="mb-2 text-sm sm:text-xl font-bold tracking-tight text-gray-900 dark:text-white truncate cursor-pointer">
@@ -98,10 +129,27 @@ const Previewer = ({
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
               <LinkMenu>
-                <Link href={"/dashboard/analytics"}>
+                <Link
+                  href={"/dashboard/analytics"}
+                  onClick={() => {
+                    setUrlId(urlId);
+                    setGet(true);
+                  }}
+                >
                   <div className="hover:bg-foreground/5 cursor-pointer p-2 rounded-md flex items-center gap-x-2">
                     <LineChart size={16} className="" />
                     Analyse
+                  </div>
+                </Link>
+                <Link
+                  href={"/dashboard/qr-code"}
+                  onClick={() => {
+                    setUrlId(urlId);
+                  }}
+                >
+                  <div className="hover:bg-foreground/5 cursor-pointer p-2 rounded-md flex items-center gap-x-2">
+                    <QrCode size={16} className="" />
+                    Qr code
                   </div>
                 </Link>
                 <div

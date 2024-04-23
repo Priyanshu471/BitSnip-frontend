@@ -2,12 +2,12 @@
 import { useUser } from "@clerk/nextjs";
 import Nothing from "./_components/nothing";
 import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
+import { Plus, PlusCircle } from "lucide-react";
 import { useLinkCreator } from "@/hooks/useLinkCreator";
 import { useShortener } from "@/hooks/useShortener";
 import Links from "./_components/links";
 import Sidebar from "./_components/sidebar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Spinner from "@/components/loader/spinner";
 import { useReload } from "@/hooks/useReload";
@@ -18,6 +18,7 @@ export default function Dashboard() {
   const { onOpen } = useLinkCreator();
   const { fetch } = useReload();
   const { linkData } = useLinkData();
+  const [showPreview, setShowPreview] = useState<boolean>(false);
 
   const shortener = useShortener();
   useEffect(() => {
@@ -26,25 +27,25 @@ export default function Dashboard() {
     }
   }, [fetch, isSignedIn]);
   return (
-    <div className="h-full flex relative items-center">
-      <Sidebar />
+    <div className="h-full min-h-fit flex relative items-center">
+      <Sidebar showPreview={showPreview} setShowPreview={setShowPreview} />
 
       <div className="flex flex-col items-center w-full h-full">
-        {shortener.processing && (
+        {shortener.processing ? (
           <div className="absolute sm:top-1/3">
             <Spinner />
           </div>
-        )}
-        {shortener.error && toast.error(shortener.error)}
-        {!shortener.processing && linkData.length === 0 && (
+        ) : linkData.length === 0 ? (
           <>
             <Nothing pagename="links" />
             <Button className="gap-x-2" onClick={onOpen}>
-              Create <PlusCircle className="hidden md:flex w-5 h-5" />
+              Create <Plus className="hidden md:flex w-5 h-5" />
             </Button>
           </>
+        ) : (
+          <Links showPreview={showPreview} />
         )}
-        {linkData.length !== 0 && <Links />}
+        {shortener.error && toast.error(shortener.error)}
       </div>
     </div>
   );

@@ -10,10 +10,7 @@ import NavTabs from "./navTabs";
 
 const Navbar = () => {
   const scrolled = useScrollTop();
-  const { isSignedIn, isLoaded } = useUser();
-  if (!isLoaded) {
-    return null;
-  }
+  const { isSignedIn, isLoaded, user } = useUser();
   return (
     <div
       className={cn(
@@ -31,7 +28,14 @@ const Navbar = () => {
             <WorkspaceName />
           </div>
         </div>
-        <div>{isSignedIn && <UserNav />}</div>
+        <div className="flex text-lg font-medium w-52 items-center justify-around">
+          {isSignedIn && (
+            <>
+              <p className="text-meta-4 underline">Hi! {user.firstName}</p>
+              <UserNav />
+            </>
+          )}
+        </div>
       </div>
       <NavTabs />
     </div>

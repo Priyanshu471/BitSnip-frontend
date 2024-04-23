@@ -4,15 +4,28 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-import { ElementRef, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  ElementRef,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react";
+import { ChevronsLeft, MenuIcon, Plus, PlusCircle } from "lucide-react";
 import { useLinkCreator } from "@/hooks/useLinkCreator";
 
-const Sidebar = () => {
+const Sidebar = ({
+  setShowPreview,
+  showPreview,
+}: {
+  setShowPreview: Dispatch<SetStateAction<boolean>>;
+  showPreview: boolean;
+}) => {
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
   const [isClosed, setIsClosed] = useState(false);
   const [isRestting, setIsResetting] = useState(false);
   const { onOpen } = useLinkCreator();
@@ -67,8 +80,8 @@ const Sidebar = () => {
       >
         <div className="flex items-center justify-between w-full space-x-2 px-8 py-4 border-b">
           <Label htmlFor="create-link">Create Link</Label>
-          <Button size={"sm"} onClick={onOpen}>
-            <PlusCircle className="flex w-5 h-5" />
+          <Button onClick={onOpen} className="h-8 w-20">
+            <Plus className="flex w-5 h-5" />
           </Button>
         </div>
         <div
@@ -110,7 +123,11 @@ const Sidebar = () => {
         </div>
         <div className="flex items-center bg-meta-1/30 justify-between w-full space-x-2 px-8 py-4 border-b">
           <Label htmlFor="airplane-mode">Show Preview</Label>
-          <Switch id="preview-mode" />
+          <Switch
+            id="preview-mode"
+            checked={showPreview}
+            onCheckedChange={setShowPreview}
+          />
         </div>
       </aside>
       <div

@@ -11,13 +11,15 @@ import {
 } from "@/components/ui/select";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useLinkData } from "@/hooks/useLinkData";
+import { useUrlId } from "@/hooks/useUrlId";
 import { linkConstructor } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SelectUrl = () => {
   const { linkData } = useLinkData();
-  const [urlId, setUrlId] = useState("");
+  const { urlId, setUrlId, get, setGet } = useUrlId();
   const { getAnalytics, processing } = useAnalytics();
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const handleClick = async () => {
     await getAnalytics(urlId);
   };
@@ -25,9 +27,15 @@ const SelectUrl = () => {
     console.log(value);
     setUrlId(value);
   };
+  useEffect(() => {
+    if (urlId && get) {
+      buttonRef.current?.click();
+      setGet(false);
+    }
+  }, [urlId]);
   return (
     <>
-      <Select onValueChange={handleSelect}>
+      <Select onValueChange={handleSelect} value={urlId}>
         <SelectTrigger className="h-10 text-lg bg-white shadow border border-meta-2 w-2/3 md:w-full">
           <SelectValue
             placeholder="Select Url"
@@ -51,6 +59,7 @@ const SelectUrl = () => {
         </SelectContent>
       </Select>
       <Button
+        ref={buttonRef}
         className=" px-2 text-xs w-fit md:px-4 md:text-base"
         disabled={!urlId}
         onClick={handleClick}

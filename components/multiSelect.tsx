@@ -3,12 +3,10 @@ import React, { useState, useRef } from "react";
 import { Input } from "./ui/input";
 import { X } from "lucide-react";
 
-const initialTags = ["tag1", "tag2", "tag3"];
-
 function TagSelect() {
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState("");
-  const [tags, setTags] = useState(initialTags);
+  const [tags, setTags] = useState<string[]>([]);
 
   const textInputRef = useRef<HTMLInputElement>(null);
 
@@ -60,7 +58,7 @@ function TagSelect() {
   };
 
   return (
-    <div className="w-full" data-tags={JSON.stringify(initialTags)}>
+    <div className="w-full" data-tags={JSON.stringify(tags)}>
       <div
         onClick={clearSearch}
         onKeyDown={(e) => e.key === "Escape" && clearSearch()}
