@@ -3,7 +3,7 @@ const MiniSpinner = () => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className="animate-spin  fill-meta-1"
+        className="animate-spin fill-meta-1"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

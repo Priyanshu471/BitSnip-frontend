@@ -2,17 +2,22 @@ import Image from "next/image";
 
 const HeroCard = () => {
   return (
-    // <div className="card hidden md:flex">
-    //   <div className="content">
-    //     <div className="back">
-    //       <div className="back-content">
-    //         <p className="max-w-2xl">
-    <Image src={"/hero-1.svg"} width={600} height={200} alt="Hero image" />
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    <div className="flex flex-col md:flex-row items-center w-full justify-around gap-x-4 my-8 md:mb-5 md:-mt-2">
+      <Image
+        src={"/hero.svg"}
+        width={300}
+        height={100}
+        alt="Hero image"
+        className="w-40 md:w-80"
+      />
+      <Image
+        src={"/hero-2.svg"}
+        width={350}
+        height={100}
+        alt="Hero image"
+        className="w-44 md:w-96"
+      />
+    </div>
   );
 };
 

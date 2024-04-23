@@ -20,6 +20,7 @@ export interface LinkData {
   urlId: string;
   longUrl: string;
 }
+
 export const useShortener = () => {
   const [processing, setProcessing] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -69,7 +70,6 @@ export const useShortener = () => {
         setLinkData(data.urls);
         setFetch(false);
         setProcessing(false);
-        console.log("complete data", data.urls);
         return data.urls;
       }
     } catch (err: AxiosError | any) {

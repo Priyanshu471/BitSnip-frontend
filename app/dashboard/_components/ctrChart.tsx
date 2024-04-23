@@ -2,105 +2,8 @@
 import { ApexOptions } from "apexcharts";
 import React, { useEffect, useState } from "react";
 import ApexChart from "./apexChart";
-import { clickCountPerDay } from "@/lib/static";
 import { MousePointer2 } from "lucide-react";
-import { countryData } from "@/lib/constants";
-
-const options: ApexOptions = {
-  legend: {
-    show: false,
-    position: "top",
-    horizontalAlign: "left",
-  },
-  colors: ["#6938cc", "#80CAEE"],
-  chart: {
-    height: 335,
-    type: "area",
-    dropShadow: {
-      enabled: true,
-      color: "#623CEA14",
-      top: 10,
-      blur: 4,
-      left: 0,
-      opacity: 0.1,
-    },
-
-    toolbar: {
-      show: true,
-    },
-  },
-  responsive: [
-    {
-      breakpoint: 1024,
-      options: {
-        chart: {
-          height: 300,
-        },
-      },
-    },
-    {
-      breakpoint: 1366,
-      options: {
-        chart: {
-          height: 350,
-        },
-      },
-    },
-  ],
-  stroke: {
-    width: [2, 2],
-    curve: "smooth",
-  },
-  grid: {
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  markers: {
-    size: 4,
-    colors: "#fff",
-    strokeColors: ["#6938CC", "#80CAEE"],
-    strokeWidth: 3,
-    strokeOpacity: 0.9,
-    strokeDashArray: 0,
-    fillOpacity: 1,
-    discrete: [],
-    hover: {
-      size: undefined,
-      sizeOffset: 5,
-    },
-  },
-  xaxis: {
-    type: "category",
-    categories: clickCountPerDay.map((item) => item.day),
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    title: {
-      style: {
-        fontSize: "0px",
-      },
-    },
-    min: 0,
-    max: Math.max(...clickCountPerDay.map((item) => item.count)) + 2,
-  },
-};
-
+import { ClickCountPerDay } from "@/hooks/useAnalytics";
 interface CtrChatState {
   series: {
     name: string;
@@ -108,9 +11,11 @@ interface CtrChatState {
   }[];
 }
 interface CtrChartProps {
-  data: number[];
+  data: ClickCountPerDay[];
+  totalClicks: number;
 }
-const CtrChart = ({ data }: CtrChartProps) => {
+
+const CtrChart = ({ data, totalClicks }: CtrChartProps) => {
   const [state, setState] = useState<CtrChatState>({
     series: [
       {
@@ -119,19 +24,115 @@ const CtrChart = ({ data }: CtrChartProps) => {
       },
     ],
   });
+
   useEffect(() => {
     handleReset();
-  }, [data]);
+  }, [data, totalClicks]);
 
   const handleReset = () => {
     setState({
       series: [
         {
           name: "Click",
-          data: clickCountPerDay.map((item) => item.count),
+          data: data.map((item) => item.count),
         },
       ],
     });
+  };
+
+  const options: ApexOptions = {
+    legend: {
+      show: false,
+      position: "top",
+      horizontalAlign: "left",
+    },
+    colors: ["#6938cc", "#80CAEE"],
+    chart: {
+      height: 335,
+      type: "area",
+      dropShadow: {
+        enabled: true,
+        color: "#623CEA14",
+        top: 10,
+        blur: 4,
+        left: 0,
+        opacity: 0.1,
+      },
+
+      toolbar: {
+        show: true,
+      },
+    },
+    responsive: [
+      {
+        breakpoint: 1024,
+        options: {
+          chart: {
+            height: 300,
+          },
+        },
+      },
+      {
+        breakpoint: 1366,
+        options: {
+          chart: {
+            height: 350,
+          },
+        },
+      },
+    ],
+    stroke: {
+      width: [2, 2],
+      curve: "smooth",
+    },
+    grid: {
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
+        },
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    markers: {
+      size: 4,
+      colors: "#fff",
+      strokeColors: ["#6938CC", "#80CAEE"],
+      strokeWidth: 3,
+      strokeOpacity: 0.9,
+      strokeDashArray: 0,
+      fillOpacity: 1,
+      discrete: [],
+      hover: {
+        size: undefined,
+        sizeOffset: 5,
+      },
+    },
+    xaxis: {
+      type: "category",
+      categories: data.map((item) => item.day),
+      axisBorder: {
+        show: true,
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: {
+      title: {
+        style: {
+          fontSize: "0px",
+        },
+      },
+      min: 0,
+      max: Math.max(...data.map((item) => item.count)) + 2,
+    },
   };
   return (
     <div className="w-full col-span-12 rounded-lg border border-stroke bg-white p-5 shadow sm:px-7 xl:col-span-8">
@@ -143,9 +144,7 @@ const CtrChart = ({ data }: CtrChartProps) => {
             </span>
             <div className="flex flex-col">
               <div className="w-full flex items-center gap-x-2 text-2xl">
-                <p className="font-semibold text-meta-3">
-                  {countryData?.length}
-                </p>
+                <p className="font-semibold text-meta-3">{totalClicks}</p>
                 <MousePointer2 size={24} className="text-meta-4/70" />
               </div>
               <p className="text-meta-4 font-medium">Total Click</p>

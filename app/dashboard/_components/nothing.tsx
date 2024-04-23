@@ -13,11 +13,23 @@ const imgData = [
     src: "/analytics.svg",
     alt: "create links to view analytics",
   },
+  {
+    pagename: "not found",
+    heading: "No analytics found, share link or select link",
+    src: "/no-analytics.svg",
+    alt: "No analytics found",
+  },
+  {
+    pagename: "qr",
+    heading: "Create links to generate QR codes",
+    src: "/qr.svg",
+    alt: "QR code generation page",
+  },
 ];
 const Nothing = ({ pagename }: { pagename: string }) => {
   const pageData = imgData.find((data) => data.pagename === pagename);
   let comingSoon = false;
-  if (pagename === "analytics") {
+  if (pagename === "qr") {
     comingSoon = true;
   }
   return (

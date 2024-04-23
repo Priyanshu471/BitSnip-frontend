@@ -22,7 +22,7 @@ const colors = [
   "#94ADD7",
   "#FF90BC",
 ];
-const PieChart = ({ data }: { data: Data[] }) => {
+const PieChart = ({ data, forValue }: { data: Data[]; forValue: string }) => {
   const options: ApexOptions = {
     chart: {
       fontFamily: "Inter, sans-serif",
@@ -74,7 +74,7 @@ const PieChart = ({ data }: { data: Data[] }) => {
     // if (values.length > 0 && percentages.length > 0) {
     handleReset();
     // }
-  }, []);
+  }, [data]);
 
   const handleReset = () => {
     setState((prevState) => ({
@@ -88,7 +88,7 @@ const PieChart = ({ data }: { data: Data[] }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-meta-3 flex items-center gap-x-2">
-            Locations
+            {forValue} clicks
             <MapPin size={24} className="text-meta-4/70" />
           </h5>
         </div>

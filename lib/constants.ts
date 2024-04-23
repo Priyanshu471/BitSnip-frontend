@@ -143,7 +143,9 @@ export interface CountryData {
   country: string;
   code: string;
 }
-export const countryData = [
+export type Country = [string, string, string];
+
+export const countryData: Country[] = [
   ["Delhi", "India", "IND"],
   ["Hyderabad", "India", "IND"],
   ["Delhi", "India", "IND"],
