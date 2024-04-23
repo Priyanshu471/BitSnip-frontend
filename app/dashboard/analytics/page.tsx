@@ -3,11 +3,9 @@ import Nothing from "../_components/nothing";
 import CtrChart from "../_components/ctrChart";
 import PieChart from "../_components/pieChart";
 import { useLinkData } from "@/hooks/useLinkData";
-import { cityCount, countryCount } from "@/lib/constants";
 import SelectUrl from "../_components/selectUrl";
 import { cn } from "@/lib/utils";
 import { useAnalytics } from "@/hooks/useAnalytics";
-import { useEffect } from "react";
 import { useAnalyticsData } from "@/hooks/useAnalyticsData";
 
 export default function Page() {
@@ -18,16 +16,6 @@ export default function Page() {
   return (
     <div className="flex flex-col justify-center items-center">
       {linkData.length === 0 && <Nothing pagename="analytics" />}
-
-      {/* <pre className="text-meta-5 mt-2 text-sm md:text-base text-wrap mx-2">
-        This is in beta! Try it out and let us know what you think at{" "}
-        <a
-          href="mailto:mishrapriyanshu2003@gmail.com"
-          className="underline text-meta-3"
-        >
-          Email
-        </a>
-      </pre> */}
       {linkData.length !== 0 && (
         <>
           <h1 className="text-2xl font-semibold text-center text-meta-3 my-4">

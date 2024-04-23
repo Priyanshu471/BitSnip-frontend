@@ -14,7 +14,7 @@ export default function Page() {
             Generate, Edit, Download, and Share QR Codes with Ease
           </h1>
           <div className="bg-white w-3/4 shadow-md rounded-md flex flex-col md:flex-row">
-            {/* <QrGenerator /> */}
+            <QrGenerator />
           </div>
         </>
       )}
