@@ -1,8 +1,12 @@
 "use client";
 import { useLinkData } from "@/hooks/useLinkData";
 import Nothing from "../_components/nothing";
-import QrGenerator from "../_components/qrGenerator";
+
+import dynamic from "next/dynamic";
 export default function Page() {
+  const QrGenerator = dynamic(() => import("../_components/qrGenerator"), {
+    ssr: false,
+  });
   const { linkData } = useLinkData();
   return (
     <div className="flex flex-col items-center h-full my-2 w-full">
