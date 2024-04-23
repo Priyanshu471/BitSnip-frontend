@@ -142,7 +142,7 @@ const Previewer = ({
                   </div>
                 </Link>
                 <Link
-                  href={"/dashboard/qr-code"}
+                  href={"/dashboard/qrcode"}
                   onClick={() => {
                     setUrlId(urlId);
                   }}

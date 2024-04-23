@@ -29,9 +29,9 @@ const imgData = [
 const Nothing = ({ pagename }: { pagename: string }) => {
   const pageData = imgData.find((data) => data.pagename === pagename);
   let comingSoon = false;
-  if (pagename === "qr") {
-    comingSoon = true;
-  }
+  // if (pagename === "qr") {
+  //   comingSoon = true;
+  // }
   return (
     <div className="flex items-center justify-center flex-col gap-y-8 mt-10">
       <h1 className="text-meta-3/75 font-semibold text-xl sm:text-2xl md:text-3xl text-center">

@@ -10,7 +10,7 @@ export default function NavTabs() {
   const tabs = [
     { name: "Links", href: `/dashboard` },
     { name: "Analytics", href: `/dashboard/analytics` },
-    { name: "QR Code", href: "/dashboard/qr-code" },
+    { name: "QR Code", href: "/dashboard/qrcode" },
   ];
 
   return (

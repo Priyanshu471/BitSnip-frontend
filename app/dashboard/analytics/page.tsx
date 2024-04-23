@@ -19,7 +19,7 @@ export default function Page() {
     <div className="flex flex-col justify-center items-center">
       {linkData.length === 0 && <Nothing pagename="analytics" />}
 
-      <pre className="text-meta-5 mt-2 text-sm md:text-base text-wrap mx-2">
+      {/* <pre className="text-meta-5 mt-2 text-sm md:text-base text-wrap mx-2">
         This is in beta! Try it out and let us know what you think at{" "}
         <a
           href="mailto:mishrapriyanshu2003@gmail.com"
@@ -27,9 +27,12 @@ export default function Page() {
         >
           Email
         </a>
-      </pre>
+      </pre> */}
       {linkData.length !== 0 && (
         <>
+          <h1 className="text-2xl font-semibold text-center text-meta-3 my-4">
+            Analyse your links with ease
+          </h1>
           <div className="flex items-center gap-x-4 w-full md:w-2/3 px-8 m-2">
             <SelectUrl />
           </div>
